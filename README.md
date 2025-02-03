@@ -1,6 +1,6 @@
 # Linux Tools Installer
 
-This repository contains a Bash script to automate the installation of popular Linux tools for penetration testing, network analysis, and cybersecurity. The script installs a wide range of tools using `apt` , ensuring an efficient setup process on Debian-based Linux distributions (such as Ubuntu, Kali Linux, etc.).
+This repository contains a Bash script to automate the installation of popular Linux tools for penetration testing, network analysis, and cybersecurity. The script installs a wide range of tools using `apt` , ensuring an efficient setup process on Debian-based Linux distributions (such as Ubuntu, Kali Linux, Antix, etc.).
 
 ## Features
 
