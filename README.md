@@ -1,6 +1,6 @@
 # Linux Tools Installer
 
-This repository contains a Bash script to automate the installation of popular Linux tools for penetration testing, network analysis, and cybersecurity. The script installs a wide range of tools using `apt` and `pip`, ensuring an efficient setup process on Debian-based Linux distributions (such as Ubuntu, Kali Linux, etc.).
+This repository contains a Bash script to automate the installation of popular Linux tools for penetration testing, network analysis, and cybersecurity. The script installs a wide range of tools using `apt` , ensuring an efficient setup process on Debian-based Linux distributions (such as Ubuntu, Kali Linux, etc.).
 
 ## Features
 
@@ -88,8 +88,8 @@ This repository contains a Bash script to automate the installation of popular L
 
 1. **Clone the repository**:
    ```bash
-   git clone 
-   cd directory
+   git clone https://github.com/Midohajhouj/ToolsInstaller/
+   cd ToolsInstaller
 
     Give the script execution permissions:
 
