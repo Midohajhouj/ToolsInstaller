@@ -53,7 +53,7 @@ apt install -y burpsuite yara fcrackzip ghidra dirbuster spiderfoot masscan
 
 # Additional Tools
 echo "[+] Installing additional tools..."
-apt install -y recon-ng maltego sublist3r massdns dirsearch scapy
+apt install -y recon-ng maltego sublist3r massdns dirsearch scapy feroxbuster wfuzz fuzz
 
 # Cleanup unnecessary packages
 echo "[+] Cleaning up unnecessary packages..."
