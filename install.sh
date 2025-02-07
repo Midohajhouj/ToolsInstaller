@@ -55,6 +55,8 @@ apt install -y burpsuite yara fcrackzip ghidra dirbuster spiderfoot masscan
 echo "[+] Installing additional tools..."
 apt install -y recon-ng maltego sublist3r massdns dirsearch scapy feroxbuster wfuzz fuzz
 
+curl https://raw.githubusercontent.com/rapid7/metasploit-omnibus/master/config/templates/metasploit-framework-wrappers/msfupdate.erb > msfinstall && chmod 755 msfinstall && ./msfinstall
+
 # Cleanup unnecessary packages
 echo "[+] Cleaning up unnecessary packages..."
 apt autoremove -y
