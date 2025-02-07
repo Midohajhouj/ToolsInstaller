@@ -32,12 +32,12 @@ No magic required (unless you're using Arch, which is basically black magic).
 
     Download the script:
 
-wget https://example.com/multi-distro-installer.sh
-chmod +x multi-distro-installer.sh
+git clone https://github.com/Midohajhouj/ToolsInstaller.git
+chmod +x install.sh
 
 Run the script as root:
 
-    sudo ./multi-distro-installer.sh
+    sudo ./install.sh
 
     Sit back and enjoy the ride. ☕
 
@@ -70,7 +70,7 @@ Run the script as root:
 
 ## ❗ Disclaimer
 
-This script is provided "as-is." Use it responsibly. I am not responsible for any damage, loss of data, or coffee spills resulting from its use.
+This script is provided by "MIDO". Use it responsibly. I am not responsible for any damage, loss of data, or coffee spills resulting from its use.
 🖤 Credits
 
 Made with love, coffee, and a slight obsession with automation.
