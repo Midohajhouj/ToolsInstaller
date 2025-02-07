@@ -1,5 +1,5 @@
 # Linux Tools Installer
-make any debian distro a kali linux
+make any debian distro a kali linux even if u don't have a GUI
 
 
 This repository contains a Bash script to automate the installation of popular Linux tools for penetration testing, network analysis, and cybersecurity. The script installs a wide range of tools using `apt` , ensuring an efficient setup process on Debian-based Linux distributions (such as Ubuntu, Kali Linux, Antix, etc.).
