@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Multi-Distro Linux Tools Installation Script
+# Linux Tools Installation Script
 
 # Check if the script is run as root
 if [ "$(id -u)" -ne 0 ]; then
@@ -151,7 +151,7 @@ for tool in $EXPLOIT_TOOLS; do
 done
 
 # Miscellaneous Tools
-MISC_TOOLS="burpsuite yara fcrackzip ghidra dirbuster spiderfoot masscan"
+MISC_TOOLS="burpsuite yara fcrackzip dirbuster spiderfoot masscan"
 for tool in $MISC_TOOLS; do
   install_package "$tool"
 done
