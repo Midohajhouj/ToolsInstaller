@@ -75,9 +75,3 @@ Run the script as root:
 ## ❗ Disclaimer
 
 This script is provided by "Triple7". Use it responsibly. I am not responsible for any damage, loss of data, or coffee spills resulting from its use.
-
-## 🖤 Credits
-
-Made with love, coffee, and a slight obsession with automation.
-
-Happy hacking! 🎉
