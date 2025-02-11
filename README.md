@@ -11,7 +11,7 @@ No magic required (unless you're using Arch, which is basically black magic).
 ## 🎯 Features
 
     Distro Detective: Automatically figures out your Linux flavor (Ubuntu, Debian, Arch, Fedora, and more).
-    Package Manager Whisperer: Talks to apt, pacman, dnf, or yum like a boss.
+    Package Manager Whisperer: Talks to apt, pacman, dnf, or yum .
     Tool Heaven: Installs a buffet of tools for:
         🕵️‍♂️ Information gathering
         💥 Exploitation
@@ -33,13 +33,13 @@ No magic required (unless you're using Arch, which is basically black magic).
     Download the script:
 
 git clone https://github.com/Midohajhouj/ToolsInstaller.git
+
+
 chmod +x install.sh
 
 Run the script as root:
 
     sudo ./install.sh
-
-    Sit back and enjoy the ride. ☕
 
 🧰 Tools Installed
 🎛 Essential Dependencies
@@ -63,6 +63,8 @@ Run the script as root:
     metasploit, responder, evil-winrm
 
 …and many more! (Check the script for the full menu.)
+
+
 📦 Fun Extras
 
     Auto-installs Metasploit Framework for you if curl is available.
@@ -71,7 +73,8 @@ Run the script as root:
 ## ❗ Disclaimer
 
 This script is provided by "MIDO". Use it responsibly. I am not responsible for any damage, loss of data, or coffee spills resulting from its use.
-🖤 Credits
+
+## 🖤 Credits
 
 Made with love, coffee, and a slight obsession with automation.
 
