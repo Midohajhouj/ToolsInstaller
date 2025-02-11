@@ -34,6 +34,8 @@ No magic required (unless you're using Arch, which is basically black magic).
 
 git clone https://github.com/Midohajhouj/ToolsInstaller.git
 
+cd ToolsInstaller
+
 
 chmod +x install.sh
 
