@@ -72,7 +72,7 @@ Run the script as root:
 
 ## ❗ Disclaimer
 
-This script is provided by "MIDO". Use it responsibly. I am not responsible for any damage, loss of data, or coffee spills resulting from its use.
+This script is provided by "Triple 7". Use it responsibly. I am not responsible for any damage, loss of data, or coffee spills resulting from its use.
 
 ## 🖤 Credits
 
