@@ -74,4 +74,8 @@ Run the script as root:
 
 ## ❗ Disclaimer
 
-Use it responsibly. I am not responsible for any damage, loss of data, or coffee spills resulting from its use. This script is *Coded by MIDO777*.
+Use it responsibly. I am not responsible for any damage, loss of data, or coffee spills resulting from its use. 
+
+---
+
+*<p align="center"> Coded by <a href="https://github.com/Midohajhouj">MIDO777</a> </p>*
