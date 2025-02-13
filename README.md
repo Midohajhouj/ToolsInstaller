@@ -1,6 +1,9 @@
 ## 🛠️ Kali Tools Installer 
 Keep your own Linux distro and add all kali linux tools to it.
 Because why waste your precious time installing tools when this script can do the dirty work for you?
+
+---
+
 ## 📝 About
 
 This is a Kali Linux tools installation script that works across multiple distributions. Whether you're hacking, pen-testing, or just pretending to be a wizard at the terminal, this script has your back.
@@ -8,6 +11,9 @@ This is a Kali Linux tools installation script that works across multiple distri
 It auto-detects your Linux distro, grabs the appropriate package manager, and installs a truckload of tools for your inner techie.
 
 No magic required (unless you're using Arch, which is basically black magic).
+
+---
+
 ## 🎯 Features
 
     Distro Detective: Automatically figures out your Linux flavor (Ubuntu, Debian, Arch, Fedora, and more).
@@ -20,6 +26,8 @@ No magic required (unless you're using Arch, which is basically black magic).
         And much more!
     Cleanup Pro: Tidies up unused packages when it's done.
 
+---
+
 ## 🛑 Prerequisites
 
     Be Root, Or Be Gone: Run it as root. Otherwise, the script will sass you and exit.
@@ -27,6 +35,8 @@ No magic required (unless you're using Arch, which is basically black magic).
         Ubuntu/Debian/Kali
         Arch/Manjaro
         Fedora/CentOS/RHEL/AlmaLinux/Rocky
+
+---
 
 ## 🚀 Usage
 
@@ -72,6 +82,8 @@ Run the script as root:
     Auto-installs Metasploit Framework for you if curl is available.
     Built-in sass for unsupported distros.
 
+---
+    
 ## ❗ Disclaimer
 
 Use it responsibly. I am not responsible for any damage, loss of data, or coffee spills resulting from its use. 
