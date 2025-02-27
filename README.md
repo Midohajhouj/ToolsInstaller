@@ -90,4 +90,4 @@ Use it responsibly. I am not responsible for any damage, loss of data, or coffee
 
 ---
 
-#### *<p align="center"> Walkthroughs by <a href="https://github.com/Midohajhouj">LIONBAD</a> </p>*
+#### *<p align="center"> Coded by <a href="https://github.com/Midohajhouj">LIONBAD</a> </p>*
