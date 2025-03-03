@@ -1,7 +1,7 @@
 ## 🛠️ Kali Tools Installer 
 Keep your own Linux distro and add all kali linux tools to it.
 Because why waste your precious time installing tools when this script can do the dirty work for you?
-
+some distro don't have in there repo the tools but if available it will be installed.
 ---
 
 ## 📝 About
