@@ -1,49 +1,45 @@
 
-## 🛠️ Kali Tools Installer  
+# 🛠️ Kali Tools Installer  
 
-Keep your own Linux distro and add all Kali Linux tools to it.  
-
-P.S: Some tools might not be available in certain distro repositories. In such cases, the script will install only those tools that are accessible.  
+The **Kali Tools Installer** allows you to integrate Kali Linux tools into your existing Linux distribution.  
+This script automates the installation of tools for penetration testing, cybersecurity analysis, and more.  
 
 ---
 
-## 📝 About  
+## 📝 Overview  
 
-This is a Kali Linux tools installation script that works across multiple distributions. Whether you're hacking, pen-testing, or just pretending to be a wizard at the terminal, this script has your back.  
+This script enables users to keep their preferred Linux distribution while installing a variety of tools commonly used in Kali Linux. It supports multiple distributions, detects your package manager, and installs the tools seamlessly.  
 
-It auto-detects your Linux distro, grabs the appropriate package manager, and installs a truckload of tools for your inner techie.  
-
-No magic required (unless you're using Arch, which is basically black magic).  
+**Note**: Some tools may not be available in certain distribution repositories. The script will install only the tools accessible in your system's repositories.  
 
 ---
 
 ## 🎯 Features  
 
-- **Distro Detective**: Automatically figures out your Linux flavor (Ubuntu, Debian, Arch, Fedora, and more).  
-- **Package Manager Whisperer**: Talks to apt, pacman, dnf, or yum.  
-- **Tool Heaven**: Installs a buffet of tools for:  
-  - 🕵️‍♂️ Information gathering  
-  - 💥 Exploitation  
-  - 🔐 Password cracking  
-  - 🌐 Network analysis  
-  - And much more!  
-- **Cleanup Pro**: Tidies up unused packages when it's done.  
+- **Automatic Distribution Detection**: Identifies the Linux distribution and uses the appropriate package manager.  
+- **Comprehensive Tool Categories**:  
+  - Information gathering  
+  - Network analysis  
+  - Password cracking  
+  - Exploitation tools  
+  - And more  
+- **Resource Cleanup**: Ensures unused packages are removed after installation.  
 
 ---
 
 ## 🛑 Prerequisites  
 
-- **Be Root, Or Be Gone**: Run it as root. Otherwise, the script will sass you and exit.  
-- **Linux Distro**: Supported distros include:  
+- **Root Access**: The script requires root permissions to execute.  
+- **Supported Linux Distributions**:  
   - Ubuntu/Debian/Kali  
   - Arch/Manjaro  
   - Fedora/CentOS/RHEL/AlmaLinux/Rocky  
 
 ---
 
-## 🚀 Usage  
+## 🚀 Installation  
 
-1. Download the script:  
+1. Clone the repository:  
    ```bash
    git clone https://github.com/Midohajhouj/ToolsInstaller.git
    cd ToolsInstaller
@@ -56,9 +52,9 @@ No magic required (unless you're using Arch, which is basically black magic).
 
 ---
 
-## 🧰 Tools Installed  
+## 🧰 Installed Tools  
 
-### 🎛 Essential Dependencies  
+### 🎛 Core Dependencies  
 - build-essential, python3-pip, python3-dev, git, curl, wget  
 
 ### 🕵️‍♂️ Information Gathering  
@@ -70,24 +66,17 @@ No magic required (unless you're using Arch, which is basically black magic).
 ### 🔐 Password Cracking  
 - john, hashcat, crunch  
 
-### 💥 Exploitation  
+### 💥 Exploitation Tools  
 - metasploit, responder, evil-winrm  
 
-…and many more! (Check the script for the full menu.)  
-
----
-
-## 📦 Fun Extras  
-
-- Auto-installs Metasploit Framework for you if curl is available.  
-- Built-in sass for unsupported distros.  
+…and many others! For a complete list, check the script itself.  
 
 ---
 
 ## ❗ Disclaimer  
 
-Use it responsibly. I am not responsible for any damage, loss of data, or coffee spills resulting from its use.  
+This script is intended for legal and ethical use only. The developers are not responsible for any misuse or damage caused by this tool.  
 
 ---
 
-#### *<p align="center"> Coded by <a href="https://github.com/Midohajhouj">LIONMAD</a> </p>*
+#### *Developed by [LIONMAD](https://github.com/Midohajhouj)*  
