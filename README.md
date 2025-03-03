@@ -1,5 +1,4 @@
-
-# 🛠️ Kali Tools Installer  
+## 🛠️ Kali Tools Installer  
 
 The **Kali Tools Installer** allows you to integrate Kali Linux tools into your existing Linux distribution.  
 This script automates the installation of tools for penetration testing, cybersecurity analysis, and more.  
