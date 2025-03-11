@@ -1,11 +1,25 @@
 #!/bin/bash
 
-# Linux Tools Installation Script
+# Logging
+LOG_FILE="/var/log/tools_installation.log"
+exec > >(tee -a "$LOG_FILE") 2>&1
+echo "[+] Logging to $LOG_FILE"
+
+# Color Output
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+YELLOW='\033[1;33m'
+NC='\033[0m' # No Color
+
+# Error Handling
+handle_error() {
+  echo -e "${RED}[-] Error: $1${NC}"
+  exit 1
+}
 
 # Check if the script is run as root
 if [ "$(id -u)" -ne 0 ]; then
-  echo "This script must be run as root. Use sudo to run the script."
-  exit 1
+  handle_error "This script must be run as root. Use sudo to run the script."
 fi
 
 # Detect Linux Distribution
@@ -54,27 +68,26 @@ DISTRO=$(detect_distro)
 PACKAGE_MANAGER=$(detect_package_manager "$DISTRO")
 
 if [ "$PACKAGE_MANAGER" == "unknown" ]; then
-  echo "Unsupported Linux distribution. Exiting..."
-  exit 1
+  handle_error "Unsupported Linux distribution. Exiting..."
 fi
 
-echo "[+] Detected Distribution: $DISTRO"
-echo "[+] Using Package Manager: $PACKAGE_MANAGER"
+echo -e "${GREEN}[+] Detected Distribution: $DISTRO${NC}"
+echo -e "${GREEN}[+] Using Package Manager: $PACKAGE_MANAGER${NC}"
 
 # Update system packages
 update_system() {
   case $PACKAGE_MANAGER in
     apt)
-      apt update && apt upgrade -y
+      apt update && apt upgrade -y || handle_error "Failed to update system packages."
       ;;
     pacman)
-      pacman -Syu --noconfirm
+      pacman -Syu --noconfirm || handle_error "Failed to update system packages."
       ;;
     yum)
-      yum update -y
+      yum update -y || handle_error "Failed to update system packages."
       ;;
     dnf)
-      dnf update -y
+      dnf update -y || handle_error "Failed to update system packages."
       ;;
   esac
 }
@@ -82,103 +95,183 @@ update_system() {
 # Install a package with the detected package manager
 install_package() {
   local package=$1
+  echo -n "[+] Installing $package..."
   case $PACKAGE_MANAGER in
     apt)
-      apt install -y "$package" || echo "[-] Failed to install $package via apt."
+      if apt install -y "$package"; then
+        echo -e "${GREEN} Done.${NC}"
+      else
+        echo -e "${RED} Failed.${NC}"
+        return 1
+      fi
       ;;
     pacman)
-      pacman -S --noconfirm "$package" || echo "[-] Failed to install $package via pacman."
+      if pacman -S --noconfirm "$package"; then
+        echo -e "${GREEN} Done.${NC}"
+      else
+        echo -e "${RED} Failed.${NC}"
+        return 1
+      fi
       ;;
     yum)
-      yum install -y "$package" || echo "[-] Failed to install $package via yum."
+      if yum install -y "$package"; then
+        echo -e "${GREEN} Done.${NC}"
+      else
+        echo -e "${RED} Failed.${NC}"
+        return 1
+      fi
       ;;
     dnf)
-      dnf install -y "$package" || echo "[-] Failed to install $package via dnf."
+      if dnf install -y "$package"; then
+        echo -e "${GREEN} Done.${NC}"
+      else
+        echo -e "${RED} Failed.${NC}"
+        return 1
+      fi
       ;;
   esac
 }
 
-# Update and upgrade system packages
-echo "[+] Updating system packages..."
-update_system
+# Interactive Mode
+interactive_mode() {
+  echo -e "${YELLOW}[+] Interactive Mode Enabled${NC}"
+  echo -e "${YELLOW}[+] Choose which categories of tools to install:${NC}"
 
-# Essential dependencies
-ESSENTIAL_PACKAGES="build-essential python3-pip python3-dev git curl wget"
-for pkg in $ESSENTIAL_PACKAGES; do
-  install_package "$pkg"
-done
+  # Essential Dependencies
+  read -p "Do you want to install Essential Dependencies? (y/n): " install_essential
+  if [[ "$install_essential" == "y" ]]; then
+    ESSENTIAL_PACKAGES="build-essential python3-pip python3-dev git curl wget"
+    for pkg in $ESSENTIAL_PACKAGES; do
+      install_package "$pkg"
+    done
+  fi
 
-# Network Scanning and Analysis Tools
-NETWORK_TOOLS="nmap ncat ndiff zenmap wireshark tshark tcpdump netcat-traditional ettercap-common arpwatch"
-for tool in $NETWORK_TOOLS; do
-  install_package "$tool"
-done
+  # Network Tools
+  read -p "Do you want to install Network Tools? (y/n): " install_network
+  if [[ "$install_network" == "y" ]]; then
+    NETWORK_TOOLS="nmap ncat ndiff zenmap wireshark tshark tcpdump netcat-traditional ettercap-common arpwatch"
+    for tool in $NETWORK_TOOLS; do
+      install_package "$tool"
+    done
+  fi
 
-# Web Application Testing Tools
-WEB_TOOLS="gobuster ffuf wpscan nikto"
-for tool in $WEB_TOOLS; do
-  install_package "$tool"
-done
+  # Web Application Testing Tools
+  read -p "Do you want to install Web Application Testing Tools? (y/n): " install_web
+  if [[ "$install_web" == "y" ]]; then
+    WEB_TOOLS="gobuster ffuf wpscan nikto"
+    for tool in $WEB_TOOLS; do
+      install_package "$tool"
+    done
+  fi
 
-# Penetration Testing Frameworks
-PEN_TEST_TOOLS="metasploit-framework aircrack-ng bettercap beef-xss"
-for tool in $PEN_TEST_TOOLS; do
-  install_package "$tool"
-done
+  # Penetration Testing Tools
+  read -p "Do you want to install Penetration Testing Tools? (y/n): " install_pen_test
+  if [[ "$install_pen_test" == "y" ]]; then
+    PEN_TEST_TOOLS="metasploit-framework aircrack-ng bettercap beef-xss"
+    for tool in $PEN_TEST_TOOLS; do
+      install_package "$tool"
+    done
+  fi
 
-# Vulnerability Analysis Tools
-VULN_TOOLS="hydra sqlmap rkhunter chkrootkit lynis"
-for tool in $VULN_TOOLS; do
-  install_package "$tool"
-done
+  # Vulnerability Analysis Tools
+  read -p "Do you want to install Vulnerability Analysis Tools? (y/n): " install_vuln
+  if [[ "$install_vuln" == "y" ]]; then
+    VULN_TOOLS="hydra sqlmap rkhunter chkrootkit lynis"
+    for tool in $VULN_TOOLS; do
+      install_package "$tool"
+    done
+  fi
 
-# Information Gathering Tools
-INFO_TOOLS="theharvester cewl dnsrecon dnsenum amass subfinder"
-for tool in $INFO_TOOLS; do
-  install_package "$tool"
-done
+  # Information Gathering Tools
+  read -p "Do you want to install Information Gathering Tools? (y/n): " install_info
+  if [[ "$install_info" == "y" ]]; then
+    INFO_TOOLS="theharvester cewl dnsrecon dnsenum amass subfinder"
+    for tool in $INFO_TOOLS; do
+      install_package "$tool"
+    done
+  fi
 
-# Password Cracking Tools
-PASSWORD_TOOLS="john hashcat crunch"
-for tool in $PASSWORD_TOOLS; do
-  install_package "$tool"
-done
+  # Password Cracking Tools
+  read -p "Do you want to install Password Cracking Tools? (y/n): " install_password
+  if [[ "$install_password" == "y" ]]; then
+    PASSWORD_TOOLS="john hashcat crunch"
+    for tool in $PASSWORD_TOOLS; do
+      install_package "$tool"
+    done
+  fi
 
-# Exploitation Tools
-EXPLOIT_TOOLS="responder evil-winrm mimikatz powershell-empire"
-for tool in $EXPLOIT_TOOLS; do
-  install_package "$tool"
-done
+  # Exploitation Tools
+  read -p "Do you want to install Exploitation Tools? (y/n): " install_exploit
+  if [[ "$install_exploit" == "y" ]]; then
+    EXPLOIT_TOOLS="responder evil-winrm mimikatz powershell-empire"
+    for tool in $EXPLOIT_TOOLS; do
+      install_package "$tool"
+    done
+  fi
 
-# Miscellaneous Tools
-MISC_TOOLS="burpsuite yara fcrackzip dirbuster spiderfoot masscan"
-for tool in $MISC_TOOLS; do
-  install_package "$tool"
-done
+  # Miscellaneous Tools
+  read -p "Do you want to install Miscellaneous Tools? (y/n): " install_misc
+  if [[ "$install_misc" == "y" ]]; then
+    MISC_TOOLS="burpsuite yara fcrackzip dirbuster spiderfoot masscan"
+    for tool in $MISC_TOOLS; do
+      install_package "$tool"
+    done
+  fi
 
-# Additional Tools
-ADDITIONAL_TOOLS="recon-ng maltego sublist3r massdns dirsearch scapy feroxbuster wfuzz"
-for tool in $ADDITIONAL_TOOLS; do
-  install_package "$tool"
-done
+  # Additional Tools
+  read -p "Do you want to install Additional Tools? (y/n): " install_additional
+  if [[ "$install_additional" == "y" ]]; then
+    ADDITIONAL_TOOLS="recon-ng maltego sublist3r massdns dirsearch scapy feroxbuster wfuzz"
+    for tool in $ADDITIONAL_TOOLS; do
+      install_package "$tool"
+    done
+  fi
 
-# Install Metasploit Framework via external script
-if command -v curl &>/dev/null; then
-  echo "[+] Installing Metasploit Framework..."
-  curl https://raw.githubusercontent.com/rapid7/metasploit-omnibus/master/config/templates/metasploit-framework-wrappers/msfupdate.erb > msfinstall
-  chmod 755 msfinstall && ./msfinstall
+  # Install Metasploit Framework
+  read -p "Do you want to install Metasploit Framework? (y/n): " install_metasploit
+  if [[ "$install_metasploit" == "y" ]]; then
+    if command -v curl &>/dev/null; then
+      echo "[+] Installing Metasploit Framework..."
+      curl https://raw.githubusercontent.com/rapid7/metasploit-omnibus/master/config/templates/metasploit-framework-wrappers/msfupdate.erb > msfinstall
+      chmod 755 msfinstall && ./msfinstall || handle_error "Failed to install Metasploit Framework."
+    else
+      echo "[-] curl is not installed. Skipping Metasploit installation."
+    fi
+  fi
+}
+
+# Main Script Logic
+if [[ "$1" == "--interactive" || "$1" == "-i" ]]; then
+  interactive_mode
 else
-  echo "[-] curl is not installed. Skipping Metasploit installation."
+  # Non-interactive mode (install everything)
+  echo -e "${YELLOW}[+] Non-Interactive Mode: Installing all tools${NC}"
+  update_system
+
+  # Install all tools
+  ALL_TOOLS="$ESSENTIAL_PACKAGES $NETWORK_TOOLS $WEB_TOOLS $PEN_TEST_TOOLS $VULN_TOOLS $INFO_TOOLS $PASSWORD_TOOLS $EXPLOIT_TOOLS $MISC_TOOLS $ADDITIONAL_TOOLS"
+  for tool in $ALL_TOOLS; do
+    install_package "$tool"
+  done
+
+  # Install Metasploit Framework
+  if command -v curl &>/dev/null; then
+    echo "[+] Installing Metasploit Framework..."
+    curl https://raw.githubusercontent.com/rapid7/metasploit-omnibus/master/config/templates/metasploit-framework-wrappers/msfupdate.erb > msfinstall
+    chmod 755 msfinstall && ./msfinstall || handle_error "Failed to install Metasploit Framework."
+  else
+    echo "[-] curl is not installed. Skipping Metasploit installation."
+  fi
 fi
 
 # Cleanup unnecessary packages
 echo "[+] Cleaning up unnecessary packages..."
 case $PACKAGE_MANAGER in
   apt)
-    apt autoremove -y
+    apt autoremove -y || handle_error "Failed to clean up unnecessary packages."
     ;;
   pacman)
-    pacman -Rns $(pacman -Qdtq) --noconfirm
+    pacman -Rns $(pacman -Qdtq) --noconfirm || handle_error "Failed to clean up unnecessary packages."
     ;;
   yum | dnf)
     echo "[+] Skipping cleanup for $PACKAGE_MANAGER as it doesn't require additional commands."
@@ -186,5 +279,5 @@ case $PACKAGE_MANAGER in
 esac
 
 # Final message
-echo "[+] Installation complete! All tools are installed successfully."
-echo "[+] You may want to restart your system for all changes to take effect."
+echo -e "${GREEN}[+] Installation complete! All selected tools are installed successfully.${NC}"
+echo -e "${GREEN}[+] You may want to restart your system for all changes to take effect.${NC}"
