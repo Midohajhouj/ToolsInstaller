@@ -76,20 +76,25 @@ echo -e "${GREEN}[+] Using Package Manager: $PACKAGE_MANAGER${NC}"
 
 # Update system packages
 update_system() {
-  case $PACKAGE_MANAGER in
-    apt)
-      apt update && apt upgrade -y || handle_error "Failed to update system packages."
-      ;;
-    pacman)
-      pacman -Syu --noconfirm || handle_error "Failed to update system packages."
-      ;;
-    yum)
-      yum update -y || handle_error "Failed to update system packages."
-      ;;
-    dnf)
-      dnf update -y || handle_error "Failed to update system packages."
-      ;;
-  esac
+  read -p "Do you want to update the system packages? (y/n): " update_choice
+  if [[ "$update_choice" == "y" ]]; then
+    case $PACKAGE_MANAGER in
+      apt)
+        apt update && apt upgrade -y || handle_error "Failed to update system packages."
+        ;;
+      pacman)
+        pacman -Syu --noconfirm || handle_error "Failed to update system packages."
+        ;;
+      yum)
+        yum update -y || handle_error "Failed to update system packages."
+        ;;
+      dnf)
+        dnf update -y || handle_error "Failed to update system packages."
+        ;;
+    esac
+  else
+    echo -e "${YELLOW}[+] Skipping system update.${NC}"
+  fi
 }
 
 # Install a package with the detected package manager
@@ -241,42 +246,28 @@ interactive_mode() {
 }
 
 # Main Script Logic
-if [[ "$1" == "--interactive" || "$1" == "-i" ]]; then
-  interactive_mode
-else
-  # Non-interactive mode (install everything)
-  echo -e "${YELLOW}[+] Non-Interactive Mode: Installing all tools${NC}"
-  update_system
-
-  # Install all tools
-  ALL_TOOLS="$ESSENTIAL_PACKAGES $NETWORK_TOOLS $WEB_TOOLS $PEN_TEST_TOOLS $VULN_TOOLS $INFO_TOOLS $PASSWORD_TOOLS $EXPLOIT_TOOLS $MISC_TOOLS $ADDITIONAL_TOOLS"
-  for tool in $ALL_TOOLS; do
-    install_package "$tool"
-  done
-
-  # Install Metasploit Framework
-  if command -v curl &>/dev/null; then
-    echo "[+] Installing Metasploit Framework..."
-    curl https://raw.githubusercontent.com/rapid7/metasploit-omnibus/master/config/templates/metasploit-framework-wrappers/msfupdate.erb > msfinstall
-    chmod 755 msfinstall && ./msfinstall || handle_error "Failed to install Metasploit Framework."
-  else
-    echo "[-] curl is not installed. Skipping Metasploit installation."
-  fi
-fi
+echo -e "${YELLOW}[+] Starting Full Interactive Mode${NC}"
+update_system
+interactive_mode
 
 # Cleanup unnecessary packages
-echo "[+] Cleaning up unnecessary packages..."
-case $PACKAGE_MANAGER in
-  apt)
-    apt autoremove -y || handle_error "Failed to clean up unnecessary packages."
-    ;;
-  pacman)
-    pacman -Rns $(pacman -Qdtq) --noconfirm || handle_error "Failed to clean up unnecessary packages."
-    ;;
-  yum | dnf)
-    echo "[+] Skipping cleanup for $PACKAGE_MANAGER as it doesn't require additional commands."
-    ;;
-esac
+read -p "Do you want to clean up unnecessary packages? (y/n): " cleanup_choice
+if [[ "$cleanup_choice" == "y" ]]; then
+  echo "[+] Cleaning up unnecessary packages..."
+  case $PACKAGE_MANAGER in
+    apt)
+      apt autoremove -y || handle_error "Failed to clean up unnecessary packages."
+      ;;
+    pacman)
+      pacman -Rns $(pacman -Qdtq) --noconfirm || handle_error "Failed to clean up unnecessary packages."
+      ;;
+    yum | dnf)
+      echo "[+] Skipping cleanup for $PACKAGE_MANAGER as it doesn't require additional commands."
+      ;;
+  esac
+else
+  echo -e "${YELLOW}[+] Skipping cleanup.${NC}"
+fi
 
 # Final message
 echo -e "${GREEN}[+] Installation complete! All selected tools are installed successfully.${NC}"
