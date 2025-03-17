@@ -78,4 +78,4 @@ This script is intended for legal and ethical use only. The developers are not r
 
 ---
 
-#### *Developed by [LIONMAD](https://github.com/Midohajhouj)*  
+#### *Developed by [MIDØ](https://github.com/Midohajhouj)*  
