@@ -217,12 +217,9 @@ function install_data_science() {
     "pytorch:Deep Learning"
     "opencv-python:Computer Vision"
     "nltk:Natural Language Processing"
-    "spacy:Natural Language Processing"
     "gensim:Topic Modeling"
     "statsmodels:Statistical Modeling"
-    "xgboost:Gradient Boosting"
     "lightgbm:Gradient Boosting"
-    "catboost:Gradient Boosting"
     "dask:Parallel Computing"
   )
   
@@ -329,14 +326,6 @@ function install_gui() {
   GUI_PACKAGES=(
     "tkinter:Standard GUI"
     "pyqt5:Qt GUI"
-    "pyside2:Qt GUI"
-    "wxpython:wxWidgets GUI"
-    "kivy:Multi-touch GUI"
-    "pygame:Game Development"
-    "pyglet:Game Development"
-    "arcade:Game Development"
-    "pygtk:GTK GUI"
-    "pysimplegui:Simple GUI"
   )
   
   for pkg in "${GUI_PACKAGES[@]}"; do
@@ -378,7 +367,6 @@ function install_cloud() {
     "terraformpy:Terraform Wrapper"
     "kubernetes:Kubernetes Client"
     "docker:Docker SDK"
-    "ansible:Automation"
   )
   
   for pkg in "${CLOUD_PACKAGES[@]}"; do
