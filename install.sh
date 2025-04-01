@@ -19,9 +19,9 @@ INSTALL_TIMESTAMP=$(date +"%Y%m%d_%H%M%S")
 # Create temp directory
 mkdir -p "$TEMP_DIR"
 
-# --------------------------
+# -------------------------
 #  Color Definitions
-# --------------------------
+# -------------------------
 RED='\033[0;31m'
 GREEN='\033[0;32m'
 YELLOW='\033[1;33m'
